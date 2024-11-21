@@ -7,16 +7,20 @@ public class PrefabsObject : MonoBehaviour
 {
 
     public bool isActive = false;
+    public GameObject Child;
 
 
-    public void IsActive(bool isActive=false)
+    public void Active()
     { 
-        transform.gameObject.SetActive(isActive);
-        this.isActive = isActive;
-        if (this.isActive)
-        {
-            Invoke(nameof(IsActive), 10);
-        }
+        Child.SetActive(true);
+        isActive = true;
+        Invoke(nameof(Deactive), 10);
 
+    }
+
+    public void Deactive()
+    {
+        Child.SetActive(false);
+        isActive = false;
     }
 }

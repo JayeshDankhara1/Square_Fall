@@ -30,6 +30,7 @@ public class ObjectSpool : MonoBehaviour
         for (int i = 0; i < temp; i++)
         {
             objects.Add(Instantiate(prefab, prefabParent));
+            objects[i].Deactive();
         }
     }
     public void ActiveObject()

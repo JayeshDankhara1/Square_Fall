@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
 
+
 public class SoundAndMusic : MonoBehaviour
 {
     public AudioSource SoundAudioSource;
@@ -11,6 +12,8 @@ public class SoundAndMusic : MonoBehaviour
     [HideInInspector]
     public static SoundAndMusic instance;
 
+
+    #region Unity Function
     public void Awake()
     {
         if (instance == null)
@@ -22,26 +25,44 @@ public class SoundAndMusic : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    public void Start()
+    {
+        StartSetData();
+    }
+    #endregion
 
+    #region Get/Set Data 
+    public void StartSetData()
+    {
         SetSound_Volume(StaticData.Sound);
         SetMusic_Volume(StaticData.Music);
     }
+    #endregion 
 
+    #region Sound Function
     public void PlaySound(AudioClip clip)
     { 
         SoundAudioSource.clip = clip;
         SoundAudioSource.Play();
     }
 
-    public void PlayMusic(AudioClip clip)
-    {
-        MusicAudioSource.clip = clip;
-        MusicAudioSource.Play();
-    }
 
     public void SoundMute(bool mute) {
     
         SoundAudioSource.mute = mute;
+    }
+    public void SetSound_Volume(float Volume)
+    {
+        SoundAudioSource.volume = Volume;
+    }
+    #endregion
+
+    #region Music Function
+    public void PlayMusic(AudioClip clip)
+    {
+        MusicAudioSource.clip = clip;
+        MusicAudioSource.Play();
     }
 
     public void MuiscMute(bool mute) 
@@ -49,13 +70,28 @@ public class SoundAndMusic : MonoBehaviour
         MusicAudioSource.mute = mute;
     }
 
-    public void SetSound_Volume(float Volume)
-    {
-        SoundAudioSource.volume = Volume;
-    }
-
     public void SetMusic_Volume(float Volume) 
     { 
         MusicAudioSource.volume= Volume;
     }
+    #endregion
+
+
+    
+
+    #region Other Function
+    public void PauseSoundAndMusic(bool IsPuse)
+    {
+        if (IsPuse)
+        {
+            SoundAudioSource.Pause();
+            MusicAudioSource.Pause();
+        }
+        else
+        {
+            SoundAudioSource.UnPause();
+            MusicAudioSource.UnPause();
+        }
+    }
+    #endregion
 }

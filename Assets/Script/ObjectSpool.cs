@@ -10,6 +10,22 @@ public class ObjectSpool : MonoBehaviour
     public Transform prefabParent;
 
 
+    public static ObjectSpool instance;
+
+    #region Unity function
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         InstanatiteCreate(25);
@@ -18,12 +34,12 @@ public class ObjectSpool : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Space)) 
-       {
-            ActiveObject();
-       }
-
+       
     }
+
+    #endregion
+
+    #region Other Function
 
     public void InstanatiteCreate(int temp)
     {
@@ -40,10 +56,13 @@ public class ObjectSpool : MonoBehaviour
             if (!objects[i].isActive)
             {
                 objects[i].Active();
+                
                 return;
             }
         }
         InstanatiteCreate(1);
         objects[objects.Count - 1].Active();
     }
+
+    #endregion
 }

@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     {
         if (transform.position.x >= RightPostion.x || transform.position.x <= LeftPostion.x)
         {
-            Debug.Log("Condton Test");
+            //Debug.Log("Condton Test");
             speed *= -1;
         }
         transform.Translate(speed*Vector3.right*Time.fixedDeltaTime);

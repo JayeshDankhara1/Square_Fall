@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening.CustomPlugins;
 using UnityEngine;
 
 public class ObjectSpool : MonoBehaviour
@@ -64,5 +65,10 @@ public class ObjectSpool : MonoBehaviour
         objects[objects.Count - 1].Active();
     }
 
+    public void ObstaclRotation(GameObject gameObject)
+    { 
+        
+    }
+    
     #endregion
 }

@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     {
         if (transform.position.x >= RightPostion.x || transform.position.x <= LeftPostion.x)
         {
+            //
+            //
             //Debug.Log("Condton Test");
             speed *= -1;
         }

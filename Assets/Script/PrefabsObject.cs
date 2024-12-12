@@ -24,6 +24,7 @@ public class PrefabsObject : MonoBehaviour
         transform.position= new Vector3(Random.Range(-1.80f,1.80f),6,0);
        // MoveObstacal();
         Child.SetActive(true);
+        Child.tag = "Obstacl";
         isActive = true;
        // Invoke(nameof(Deactive), 10);
 
@@ -37,8 +38,18 @@ public class PrefabsObject : MonoBehaviour
 
     public void MoveObstacal()
     {
-        Child_Rigidbody.AddForce(new Vector2(0.5f,0));
+      //  Child_Rigidbody.AddForce(new Vector2(Random.Range(-1f,1f),0));
+        Child_Rigidbody.AddForce(new Vector2(0.1f,0));
      //   Debug.Log("Obstacal Move");
         //Child_Rigidbody.DOMoveX(transform.position.x  *0.2F * Time.fixedDeltaTime);
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+      
+            Debug.Log(collision.gameObject);
+
+
+    }
+
 }

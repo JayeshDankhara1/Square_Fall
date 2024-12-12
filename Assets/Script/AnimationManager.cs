@@ -69,4 +69,25 @@ public class AnimationManager : MonoBehaviour
            );
 
     }
+
+    public static void PunchScale(Transform transform,  Vector3 Punch, float DurtionTime = 0, float DelayTime = 0, UnityAction EndAction = null, UnityAction StartAction = null, Ease ease = Ease.Linear)
+    {
+
+
+
+        transform.DOPunchScale(Punch, DurtionTime)
+            .OnStart(() =>
+            {
+                StartAction?.Invoke();
+            })
+           .SetDelay(DelayTime)
+           .SetEase(ease)
+           .OnComplete(() =>
+           {
+               EndAction?.Invoke();
+               //Debug.Log("Complete");   
+           }
+           );
+
+    }
 }

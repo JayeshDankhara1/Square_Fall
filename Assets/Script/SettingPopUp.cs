@@ -44,12 +44,12 @@ public class SettingPopUp : MonoBehaviour
 
         switch (button) {
             case "Close":
-                AnimationManager.Scale(PopUpBg.transform, 0.5f, EndPostion: Vector3.zero, StartPostion: Vector3.one, ease: Ease.InFlash,EndAction:
+               /* AnimationManager.Scale(PopUpBg.transform, 0.5f, EndPostion: Vector3.zero, StartPostion: Vector3.one, ease: Ease.InFlash,EndAction:
                     () => {
                         PopUpBg.transform.localScale= Vector3.one;
                         PopUp.SetActive(false);
                     }
-                    ); 
+                    ); */
                 //PopUp.SetActive(false);
                 break;
             case "Sound":
@@ -64,6 +64,7 @@ public class SettingPopUp : MonoBehaviour
             case "Music_Mute":
                 Music_Icon();
                 break;
+  
         }
     }
     public void Sound_Slidar()

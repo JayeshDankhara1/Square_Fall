@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     public float speed;
     public Vector2 LeftPostion;
     public Vector2 RightPostion;
+
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

@@ -10,6 +10,7 @@ public class ObjectSpool : MonoBehaviour
     public PrefabsObject prefab;
     public Transform prefabParent;
 
+    public GamePlay Ref_GamePlay;
 
     public static ObjectSpool instance;
 
@@ -29,7 +30,9 @@ public class ObjectSpool : MonoBehaviour
 
     void Start()
     {
+        Ref_GamePlay = GamePlay.instance;
         InstanatiteCreate(25);
+
     }
 
     // Update is called once per frame
@@ -61,14 +64,20 @@ public class ObjectSpool : MonoBehaviour
                 return;
             }
         }
+
+       // Debug.Log("New One created");
         InstanatiteCreate(1);
         objects[objects.Count - 1].Active();
     }
 
-    public void ObstaclRotation(GameObject gameObject)
-    { 
-        
+    public void AllObjectsDeactive()
+    {
+
+        for (int i = 0; i < objects.Count; i++)
+        {
+            objects[i].Deactive();
+        }
+       
     }
-    
     #endregion
 }

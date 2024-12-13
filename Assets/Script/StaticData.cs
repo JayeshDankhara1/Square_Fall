@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StaticData 
 {
+    #region Sound 
     public static float Sound { 
         get
         {
@@ -15,7 +16,22 @@ public class StaticData
             PlayerPrefs.Save();
         }
     }
+    public static int MuteSound
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("MuteSound", 0);
+        }
+        set
+        {
+            PlayerPrefs.SetInt("MuteSound", value);
+            PlayerPrefs.Save();
 
+        }
+    }
+    #endregion
+
+    #region Music
     public static float Music {
         get
         {
@@ -41,21 +57,9 @@ public class StaticData
 
         }
     }
+    #endregion
 
-    public static int MuteSound
-    {
-        get
-        {
-            return PlayerPrefs.GetInt("MuteSound", 0);
-        }
-        set
-        {
-            PlayerPrefs.SetInt("MuteSound", value);
-            PlayerPrefs.Save();
-
-        }
-    }
-
+    #region Score
     public static int Score
     {
         get
@@ -70,6 +74,51 @@ public class StaticData
         }
     }
 
+    public static int HighScore
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("HighScore", 0);
+        }
+        set
+        {
+            PlayerPrefs.SetInt("HighScore", value);
+            PlayerPrefs.Save();
+
+        }
+    }
+    #endregion
+
+    #region Touch
+    public static float Touch
+    {
+        get
+        {
+            return PlayerPrefs.GetFloat("Touch", 0.0f);
+
+        }
+        set
+        {
+            PlayerPrefs.SetFloat("Touch", value);
+            PlayerPrefs.Save();
+        }
+    }
+
+    public static int MuteTouch
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("MuteTouch", 0);
+        }
+        set
+        {
+            PlayerPrefs.SetInt("MuteTouch", value);
+            PlayerPrefs.Save();
+
+        }
+    }
+
+    #endregion
 
 
 }

@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class GamePlay : MonoBehaviour
 {
-    public ObjectSpool ObjectSpool;
+    public ObjectSpool Ref_ObjectSpool;
     public bool IsGameOver = false;
     public static GamePlay instance;
     public Player Ref_Player;
-
+    
+    public SoundAndMusic Ref_SoundAndMusic;
+    public GamePlayUiManager Ref_GamePlayUiManager;
    
 
 
@@ -19,7 +21,10 @@ public class GamePlay : MonoBehaviour
     }
     public void Start()
     {
-        ObjectSpool = ObjectSpool.instance;
+
+        Ref_ObjectSpool = ObjectSpool.instance;
+        Ref_GamePlayUiManager = GamePlayUiManager.instance;
+        Ref_SoundAndMusic = SoundAndMusic.instance;
         GameStart();
        // StartCoroutine(ObstcalSpool());
     }
@@ -28,8 +33,10 @@ public class GamePlay : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
+
            // Debug.Log("Obstacl Creat");
-         ObjectSpool.ActiveObject();
+         Ref_ObjectSpool.ActiveObject();
+
         }
         
 
@@ -41,8 +48,8 @@ public class GamePlay : MonoBehaviour
     {
         while (!IsGameOver)
         {
-            yield return new WaitForSeconds(1f);
-            ObjectSpool.ActiveObject();
+            yield return new WaitForSeconds(Random.Range(0.2f,1.5f));
+            Ref_ObjectSpool.ActiveObject();
         }
     }
 
@@ -51,15 +58,17 @@ public class GamePlay : MonoBehaviour
     { 
         IsGameOver = true;
         StopAllCoroutines();
-        ObjectSpool.AllObjectsDeactive();
+        Ref_ObjectSpool.AllObjectsDeactive();
         Ref_Player.speed = 0f;
 
     }
 
     public void GameStart()
     {
+        StaticData.Score = 0;
         Ref_Player.speed =-1f;
         IsGameOver = false;
+        Ref_SoundAndMusic.PlayMusic(Ref_GamePlayUiManager.BG_clip);
         StartCoroutine(ObstcalSpool());
     }
 

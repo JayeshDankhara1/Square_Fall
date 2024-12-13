@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 45535232}
   m_Layer: 0
   m_Name: PlayerBackground
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -716,9 +716,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240929b2baa10714aa3ff3a24d63705e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectSpool: {fileID: 0}
+  Ref_ObjectSpool: {fileID: 0}
   IsGameOver: 0
   Ref_Player: {fileID: 1939681231}
+  Ref_SoundAndMusic: {fileID: 0}
+  Ref_GamePlayUiManager: {fileID: 0}
 --- !u!1 &503545009
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +730,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 503545010}
+  - component: {fileID: 503545011}
   m_Layer: 0
   m_Name: GamePlayUIManager
   m_TagString: Untagged
@@ -750,6 +753,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &503545011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503545009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e12694f4fb68488f672b3c6a19375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BG_clip: {fileID: 8300000, guid: c7bb1f7b5bd12534a93f08f37851cd56, type: 3}
+  Obstacl_Clip: {fileID: 8300000, guid: 91f976f4022e9304bb1cdaaefded24c8, type: 3}
+  UnObstcl_Clip: {fileID: 8300000, guid: 5863d9d4d4c5d74448cfe5ae0f01db9e, type: 3}
+  Click_Clip: {fileID: 8300000, guid: 8547ad2674b2f5a4f8da7f72c0c29467, type: 3}
+  Obstacal_Sprite: {fileID: 21300000, guid: 1ade414808dfd45bebaee3951ef93e20, type: 3}
+  UnObsatacal_Sprite: {fileID: 21300000, guid: 2dcfc01b5b800426bacf64f66c0d09ad, type: 3}
 --- !u!1 &577665760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,7 +1306,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e8cd3cffd0d684631b8b486cc5fbe11e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1312,6 +1333,7 @@ MonoBehaviour:
   speed: -1
   LeftPostion: {x: -1.5, y: 0}
   RightPostion: {x: 1.5, y: 0}
+  Ref_GamePlay: {fileID: 471231707}
 --- !u!58 &1939681232
 CircleCollider2D:
   m_ObjectHideFlags: 0

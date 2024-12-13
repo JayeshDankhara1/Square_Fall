@@ -8,6 +8,7 @@ public class SoundAndMusic : MonoBehaviour
 {
     public AudioSource SoundAudioSource;
     public AudioSource MusicAudioSource;
+    public AudioSource TouchAudioSource;
 
     [HideInInspector]
     public static SoundAndMusic instance;
@@ -37,12 +38,14 @@ public class SoundAndMusic : MonoBehaviour
     {
         SetSound_Volume(StaticData.Sound);
         SetMusic_Volume(StaticData.Music);
+        
     }
     #endregion 
 
     #region Sound Function
     public void PlaySound(AudioClip clip)
-    { 
+    {
+        SoundAudioSource.clip = null;
         SoundAudioSource.clip = clip;
         SoundAudioSource.Play();
     }
@@ -51,16 +54,19 @@ public class SoundAndMusic : MonoBehaviour
     public void SoundMute(bool mute) {
     
         SoundAudioSource.mute = mute;
+        TouchAudioSource.mute = mute;
     }
     public void SetSound_Volume(float Volume)
     {
         SoundAudioSource.volume = Volume;
+        TouchAudioSource.volume = Volume;
     }
     #endregion
 
     #region Music Function
     public void PlayMusic(AudioClip clip)
     {
+        MusicAudioSource.clip = null;
         MusicAudioSource.clip = clip;
         MusicAudioSource.Play();
     }
@@ -70,14 +76,25 @@ public class SoundAndMusic : MonoBehaviour
         MusicAudioSource.mute = mute;
     }
 
+    
+
     public void SetMusic_Volume(float Volume) 
     { 
         MusicAudioSource.volume= Volume;
     }
     #endregion
 
+    #region Touch Function
+    public void PlayTouch(AudioClip clip)
+    {
+        TouchAudioSource.clip = null;
+        TouchAudioSource.clip = clip;
+        TouchAudioSource.Play();
+    }
 
-    
+
+    #endregion
+
 
     #region Other Function
     public void PauseSoundAndMusic(bool IsPuse)
@@ -86,11 +103,13 @@ public class SoundAndMusic : MonoBehaviour
         {
             SoundAudioSource.Pause();
             MusicAudioSource.Pause();
+            TouchAudioSource.Pause();
         }
         else
         {
             SoundAudioSource.UnPause();
             MusicAudioSource.UnPause();
+            TouchAudioSource.UnPause();
         }
     }
     #endregion

@@ -12,18 +12,22 @@ public class PrefabsObject : MonoBehaviour
 
     public bool isActive = false;
     public bool IsFocediraction = false;
-    public bool isGameOver = false; 
+     
     public GameObject Child;
     public Rigidbody2D Child_Rigidbody;
 
     public SpriteRenderer ObstaclSpriteRender;
-    public Sprite ObstacalSprite;
-    public Sprite UnObsatacalSprite;
+    //public Sprite ObstacalSprite;
+    //public Sprite UnObsatacalSprite;
+
+    
+    public GamePlayUiManager Ref_GamePlayUiManager;
 
 
     public void Start()
     {
-        IsFocediraction= Random.Range(-5,5)<0 ? true : false;
+        Ref_GamePlayUiManager = GamePlayUiManager.instance;
+        IsFocediraction = Random.Range(-5,5)<0 ? true : false;
     }
 
     public void FixedUpdate()
@@ -38,12 +42,13 @@ public class PrefabsObject : MonoBehaviour
     {
         transform.position= new Vector3(Random.Range(-1.80f,1.80f),6,0);
         Child.transform.localPosition = new Vector3(0,0,0);
-        Child.tag = Random.Range(-5, 10) < 0 ? "Obstacl" : "Unobstacl";
-        ObstaclSpriteRender.sprite = Child.CompareTag("Obstacl") ? ObstacalSprite : UnObsatacalSprite;
+        Child.tag = Random.Range(-50, 5) < 0 ? "Obstacl" : "Unobstacl";
+        ObstaclSpriteRender.sprite = Child.CompareTag("Obstacl") ? Ref_GamePlayUiManager.Obstacal_Sprite : Ref_GamePlayUiManager.UnObsatacal_Sprite;
        // MoveObstacal();
         Child.SetActive(true);
         //Child.tag = "Obstacl";
         isActive = true;
+
        // Invoke(nameof(Deactive), 10);
 
     }

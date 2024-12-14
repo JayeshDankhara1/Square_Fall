@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region Varibal
+    [Header ("Varibal")]
     public float speed;
     public Vector2 LeftPostion;
     public Vector2 RightPostion;
+
+    [Space]
+    [Header("Ref_Scrpit")]
     public GamePlay Ref_GamePlay;
 
+    #endregion
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Ref_GamePlay.Ref_SoundAndMusic.PlayTouch(Ref_GamePlay.Ref_GamePlayUiManager.Click_Clip);
+            Ref_GamePlay.Ref_GamePlayUiManager.Play_TouchSound();
+            //Ref_GamePlay.Ref_SoundAndMusic.PlayTouch(Ref_GamePlay.Ref_GamePlayUiManager.Click_Clip);
             speed *= -1;
         }     
     }

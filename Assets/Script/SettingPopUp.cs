@@ -7,172 +7,59 @@ using UnityEngine.UI;
 
 public class SettingPopUp : MonoBehaviour
 {
-    [Header ("Slider")]
-    public Slider SoundSlider;
-    public Slider MusicSlider;
-    [Space]
-    [Header("ImageParent")]
-    public Image SoundImage;
-    public Image MusicImage;
-    [Space]
-    [Header("ImageSprite")]
-    public Sprite SoundSprite;
-    public Sprite MusicSprite;
-    public Sprite MuteSoundSprite;
-    public Sprite MuteMusicSprite;
-    [Space]
-    [Header("Popup Refanace")]
-    public GameObject PopUp;
-    public GameObject PopUpBg;
+
+    public SoundAndMusic Ref_SoundAndMusic;
 
 
-    //SoundAndMusic SoundMusic;
 
     public void Start()
     {
-        SoundSlider.value = StaticData.Sound;
-        MusicSlider.value = StaticData.Music;
-        SetSoundAndMusic();
-
-      //  SoundMusic = SoundAndMusic.instance;
+        Ref_SoundAndMusic.MusicAudioSource.loop = true;
 
     }
     
 
-    public void ButtonControl(string button)
+   
+    public void SoundOn()
     {
-
-        switch (button) {
-            case "Close":
-               /* AnimationManager.Scale(PopUpBg.transform, 0.5f, EndPostion: Vector3.zero, StartPostion: Vector3.one, ease: Ease.InFlash,EndAction:
-                    () => {
-                        PopUpBg.transform.localScale= Vector3.one;
-                        PopUp.SetActive(false);
-                    }
-                    ); */
-                //PopUp.SetActive(false);
-                break;
-            case "Sound":
-                Sound_Slidar();
-                break;
-            case "Music":
-                Music_Slidar();
-                break;
-            case "Sound_Mute":
-                Sound_Icon();
-                break;
-            case "Music_Mute":
-                Music_Icon();
-                break;
-  
-        }
-    }
-    public void Sound_Slidar()
-    {
-        StaticData.Sound = SoundSlider.value;
-        //soundandmusic.SoundAudioSource.volume = SoundSlider.value;
-        SoundAndMusic.instance.SetSound_Volume(SoundSlider.value);
-        if (StaticData.Sound == 0)
-        {
-            SoundMute(true);
-        }
-        else
-        {
-            SoundMute(false);
-        }
-    }
-
-    public void Music_Slidar()
-    {
-        StaticData.Music = MusicSlider.value;
-        SoundAndMusic.instance.SetMusic_Volume(MusicSlider.value);
-       // soundandmusic.MusicAudioSource.volume = MusicSlider.value;
-        if (StaticData.Music == 0)
-        {
-            MusicMute(true);
-        }
-        else
-        {
-            MusicMute(false);
-        }
-    }
-
-    public void Music_Icon()
-    {
-        if (StaticData.MuteMusic == 0)
-        {
-            MusicMute(true); 
-        }
-        else
-        {
-            MusicMute(false);
-        }
-    }
-
-    public void Sound_Icon()    
-    {
-        if (StaticData.MuteSound == 0)
-        {
-            SoundMute(true);
-        }
-        else
-        {
-            SoundMute(false);
-        }
+        StaticData.MuteSound = 0;
+        StaticData.MuteTouch = 0;
+        Ref_SoundAndMusic.SoundAudioSource.mute = false;
+        Ref_SoundAndMusic.TouchAudioSource.mute = false;
 
     }
-
-    public void SoundMute(bool mute)
+    public void SoundOff()
     {
-     
-        if (mute)
-        {
-            StaticData.MuteSound = 1;
-            SoundImage.sprite = MuteSoundSprite;
-            SoundAndMusic.instance.SoundMute(true);
-        }
-        else
-        {
-            StaticData.MuteSound = 0;
-            SoundImage.sprite = SoundSprite;
-            SoundAndMusic.instance.SoundMute(false);
-        }
+        Ref_SoundAndMusic.SoundAudioSource.mute = true;
+        Ref_SoundAndMusic.TouchAudioSource.mute = true;
+        StaticData.MuteSound = 1;
+        StaticData.MuteTouch = 1;
+    }
+    public void MusicOn()
+    {
+        Ref_SoundAndMusic.MusicAudioSource.mute = false;
+        StaticData.MuteMusic = 0;
+    }
+    public void MusicOff()
+    {
+        Ref_SoundAndMusic.MusicAudioSource.mute = true;
+        StaticData.MuteMusic = 1;
     }
 
-    public void MusicMute(bool mute)
+    public void SetSound_Volume(float Volume)
     {
-        if (mute)
-        {
-            StaticData.MuteMusic = 1;
-            MusicImage.sprite = MuteMusicSprite;
-            SoundAndMusic.instance.MuiscMute(true);
-        }
-        else
-        {
-            StaticData.MuteMusic = 0;
-            MusicImage.sprite = MusicSprite;
-            SoundAndMusic.instance.MuiscMute(false);
-        }
+        StaticData.Sound = Volume;
+        StaticData.Touch = Volume;
+
+        Ref_SoundAndMusic.SoundAudioSource.volume = Volume;
+        Ref_SoundAndMusic.TouchAudioSource.volume = Volume;
     }
 
-    public void SetSoundAndMusic()
+    public void SetMusic_Volume(float Volume)
     {
-        if (StaticData.MuteSound == 0)
-        {
-            SoundMute(false);
-        }
-        else
-        {
-            SoundMute(true);
-        }
-
-        if (StaticData.MuteMusic == 0)
-        {
-            MusicMute(false);
-        }
-        else
-        {
-            MusicMute(true);
-        }
+        StaticData.Music = Volume;
+        Ref_SoundAndMusic.MusicAudioSource.volume = Volume;
     }
+
+
 }

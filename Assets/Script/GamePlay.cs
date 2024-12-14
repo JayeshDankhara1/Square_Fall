@@ -12,6 +12,7 @@ public class GamePlay : MonoBehaviour
     
     public SoundAndMusic Ref_SoundAndMusic;
     public GamePlayUiManager Ref_GamePlayUiManager;
+    public GamePlayButtonManager Ref_GamePlayButtonManager;
    
 
 
@@ -21,10 +22,11 @@ public class GamePlay : MonoBehaviour
     }
     public void Start()
     {
-
+        Ref_GamePlayUiManager.GameOverPopUp_Close();
         Ref_ObjectSpool = ObjectSpool.instance;
-        Ref_GamePlayUiManager = GamePlayUiManager.instance;
         Ref_SoundAndMusic = SoundAndMusic.instance;
+        
+        
         GameStart();
        // StartCoroutine(ObstcalSpool());
     }
@@ -50,6 +52,7 @@ public class GamePlay : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(0.2f,1.5f));
             Ref_ObjectSpool.ActiveObject();
+           
         }
     }
 
@@ -60,15 +63,17 @@ public class GamePlay : MonoBehaviour
         StopAllCoroutines();
         Ref_ObjectSpool.AllObjectsDeactive();
         Ref_Player.speed = 0f;
+        Ref_GamePlayButtonManager.GameOverPopUp_Load();
+
 
     }
 
     public void GameStart()
     {
         StaticData.Score = 0;
-        Ref_Player.speed =-1f;
+        Ref_Player.speed =-2f;
         IsGameOver = false;
-        Ref_SoundAndMusic.PlayMusic(Ref_GamePlayUiManager.BG_clip);
+        Ref_GamePlayUiManager.Play_BGMusic();
         StartCoroutine(ObstcalSpool());
     }
 

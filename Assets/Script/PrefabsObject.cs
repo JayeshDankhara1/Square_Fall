@@ -21,12 +21,13 @@ public class PrefabsObject : MonoBehaviour
     //public Sprite UnObsatacalSprite;
 
     
-    public GamePlayUiManager Ref_GamePlayUiManager;
-
+    //public GamePlayUiManager Ref_GamePlayUiManager;
+    public GamePlay Ref_GamePlay;
 
     public void Start()
     {
-        Ref_GamePlayUiManager = GamePlayUiManager.instance;
+        Ref_GamePlay  = GamePlay.instance;
+        //   Ref_GamePlayUiManager = GamePlayUiManager.instance;
         IsFocediraction = Random.Range(-5,5)<0 ? true : false;
     }
 
@@ -42,8 +43,8 @@ public class PrefabsObject : MonoBehaviour
     {
         transform.position= new Vector3(Random.Range(-1.80f,1.80f),6,0);
         Child.transform.localPosition = new Vector3(0,0,0);
-        Child.tag = Random.Range(-50, 5) < 0 ? "Obstacl" : "Unobstacl";
-        ObstaclSpriteRender.sprite = Child.CompareTag("Obstacl") ? Ref_GamePlayUiManager.Obstacal_Sprite : Ref_GamePlayUiManager.UnObsatacal_Sprite;
+        Child.tag = Random.Range(-5, 5) < 0 ? "Obstacl" : "Unobstacl";
+        ObstaclSpriteRender.sprite = Child.CompareTag("Obstacl") ? Ref_GamePlay.Ref_GamePlayUiManager.Obstacal_Sprite : Ref_GamePlay. Ref_GamePlayUiManager.UnObsatacal_Sprite;
        // MoveObstacal();
         Child.SetActive(true);
         //Child.tag = "Obstacl";

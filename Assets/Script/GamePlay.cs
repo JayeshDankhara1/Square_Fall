@@ -13,7 +13,7 @@ public class GamePlay : MonoBehaviour
     public SoundAndMusic Ref_SoundAndMusic;
     public GamePlayUiManager Ref_GamePlayUiManager;
     public GamePlayButtonManager Ref_GamePlayButtonManager;
-   
+    public SettingPopUp Ref_SettingPopUp;
 
 
     public void Awake()

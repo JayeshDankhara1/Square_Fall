@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Net.Http.Headers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -96,43 +98,57 @@ public class GamePlayUiManager : MonoBehaviour
     #region Sound and Music Function
     public void SetSound()
     {
-        Ref_GamePlay.Ref_SoundAndMusic.SetSound_Volume(Sound_Slider.value);
+        // Ref_GamePlay.Ref_SoundAndMusic.SetSound_Volume(Sound_Slider.value);
         //Ref_GamePlay.Ref_SoundAndMusic.Settouch_Volume(Sound_Slider.value);
-
+        Sound_Slider.value=StaticData.Sound;
     }
 
     public void SetMusic()
     {
-        Ref_GamePlay.Ref_SoundAndMusic.SetMusic_Volume(Sound_Slider.value);
+        //Ref_GamePlay.Ref_SoundAndMusic.SetMusic_Volume(Sound_Slider.value);
+        Music_Slider.value = StaticData.Music;
     }
 
-    public void Sound_Slidar()
-    { 
-        StaticData.Sound = Sound_Slider.value;
-        StaticData.Touch = Sound_Slider.value;
-    }
-
-    public void Music_Slidar()
+    public void Sound_Slider_Click()
     {
-        StaticData.Music = Music_Slider.value;  
+        //StaticData.Sound = Sound_Slider.value;
+        //StaticData.Touch = Sound_Slider.value;
+        //Ref_GamePlay.Ref_SoundAndMusic.SoundAudioSource.volume = Sound_Slider.value;
+        //Ref_GamePlay.Ref_SoundAndMusic.TouchAudioSource.volume = Sound_Slider.value;
+        //Ref_GamePlay.Ref_SoundAndMusic.SetSound_Volume(Sound_Slider.value);
+
+        Ref_GamePlay.Ref_SettingPopUp.SetSound_Volume(Sound_Slider.value);
+        
+    }
+
+    public void Music_Slider_Click()
+    {
+        Ref_GamePlay.Ref_SettingPopUp.SetMusic_Volume(Music_Slider.value);
+        //Ref_GamePlay.Ref_SoundAndMusic.SetMusic_Volume(Music_Slider.value);
+        //Ref_GamePlay.Ref_SoundAndMusic.MusicAudioSource.volume = Music_Slider.value;
     }
 
     public void Sound_on()
     { 
-        Sound_ImageSorce.sprite = SoundOn_Sprite; 
+        Sound_ImageSorce.sprite = SoundOn_Sprite;
+        Ref_GamePlay.Ref_SettingPopUp.SoundOn();
+        
     }
     public void Sound_Off()
     { 
         Sound_ImageSorce.sprite = SoundOff_Sprite;
+        Ref_GamePlay.Ref_SettingPopUp.SoundOff();
     }
 
     public void Music_on()
     {
         Music_ImageSorce.sprite = MusicOn_Sprite;
+        Ref_GamePlay.Ref_SettingPopUp.MusicOn();
     }
     public void Music_off()
     {
         Music_ImageSorce.sprite = MusicOff_Sprite;
+        Ref_GamePlay.Ref_SettingPopUp.MusicOff();
     }
 
     #endregion
@@ -153,4 +169,66 @@ public class GamePlayUiManager : MonoBehaviour
 
     #endregion
 
+    public void SettingPopUp_Open()
+    {
+        SetSound();
+        SetMusic();
+        SettingPopUp.SetActive(true);
+    }
+
+    public void SettingPopUp_Close()
+    {
+
+        SettingPopUp.SetActive(false);
+    }
+
+    public void Sound_Click()
+    {
+        if (StaticData.MuteSound == 0)
+            Sound_Off();
+        else
+            Sound_on();
+    }
+
+    public void Music_Click()
+    {
+        if (StaticData.MuteMusic == 0)
+            Music_off();
+        else
+            Music_on();
+    }
+
+    public void ButtonClick(string Button)
+    {
+        switch (Button)
+        {
+            case "SettingPopUp_Load":
+                SettingPopUp_Open();
+                break;
+            case "Sound_Slidar":
+                Sound_Slider_Click();
+                break;
+            case "Music_Slidar":
+                Music_Slider_Click();
+                break;
+            case "Sound":
+                Sound_Click();
+                break;
+            case "Music":
+                Music_Click();
+                break;
+            case "Close_SettingPopUp":
+                SettingPopUp_Close();
+                break;
+            //case "GameOverPopUp_Load":
+            //    GameOverPopUp_Open();
+            //    break;
+            case "Close_GameOverPopUp":
+                GameOverPopUp_Close();
+                break;
+            case "Relaod":
+
+                break;
+        }
+    }
 }

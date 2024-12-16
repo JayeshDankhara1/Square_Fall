@@ -129,7 +129,7 @@ public class StaticData
         }
         set
         {
-            PlayerPrefs.SetInt("Touch", value);
+            PlayerPrefs.SetInt("Player_Touch", value);
             PlayerPrefs.Save();
         }
     }

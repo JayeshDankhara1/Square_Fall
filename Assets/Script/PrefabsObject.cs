@@ -1,11 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using DG.Tweening;
-using UnityEditor.XR;
+
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
-using UnityEngine.UI;
 
 public class PrefabsObject : MonoBehaviour
 {

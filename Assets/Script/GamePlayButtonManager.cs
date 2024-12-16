@@ -40,6 +40,12 @@ public class GamePlayButtonManager : MonoBehaviour
             case "Reload":
                 RePlay_Game();
                 break;
+            case "Left_ButtonClick":
+                Left_ButtonClick();
+                break;
+            case "Right_ButtonClick":
+                Right_ButtonClick();
+                break;
         }
     }
 
@@ -113,5 +119,13 @@ public class GamePlayButtonManager : MonoBehaviour
         Ref_GamePlay.Ref_GamePlayUiManager.GameOverPopUp_Close();
         Ref_GamePlay.GameStart();
     }
-    
+
+    public void Left_ButtonClick()
+    {
+        Ref_GamePlay.Ref_Player.speed = -2;
+    }
+    public void Right_ButtonClick()
+    {
+        Ref_GamePlay.Ref_Player.speed = 2;
+    }
 }

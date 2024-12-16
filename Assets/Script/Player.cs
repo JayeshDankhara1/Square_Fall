@@ -15,14 +15,35 @@ public class Player : MonoBehaviour
     public GamePlay Ref_GamePlay;
 
     #endregion
+
+
+
+    public void Start()
+    {
+        if (StaticData.Player_Touch == 1)
+        {
+            Ref_GamePlay.Ref_GamePlayUiManager.MutiTouchButton_On();
+        }
+        else
+        {
+            Ref_GamePlay.Ref_GamePlayUiManager.MutiTouchButton_Off();
+        }
+    }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && StaticData.Player_Touch == 0)
         {
+            Debug.Log("S Test Ok");
             Ref_GamePlay.Ref_GamePlayUiManager.Play_TouchSound();
             //Ref_GamePlay.Ref_SoundAndMusic.PlayTouch(Ref_GamePlay.Ref_GamePlayUiManager.Click_Clip);
             speed *= -1;
-        }     
+        }
+        else
+        {
+            Debug.Log("M Test Ok");
+           // Ref_GamePlay.Ref_GamePlayUiManager.Play_TouchSound();
+
+        }
     }
 
     private void FixedUpdate()

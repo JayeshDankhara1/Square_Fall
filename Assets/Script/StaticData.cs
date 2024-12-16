@@ -120,5 +120,19 @@ public class StaticData
 
     #endregion
 
+    public static int Player_Touch
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("Player_Touch", 0 ) ;
+
+        }
+        set
+        {
+            PlayerPrefs.SetInt("Touch", value);
+            PlayerPrefs.Save();
+        }
+    }
+
 
 }

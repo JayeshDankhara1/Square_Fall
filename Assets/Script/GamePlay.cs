@@ -73,8 +73,22 @@ public class GamePlay : MonoBehaviour
         StaticData.Score = 0;
         Ref_Player.speed =-2f;
         IsGameOver = false;
-        Ref_GamePlayUiManager.Play_BGMusic();
+       // Ref_GamePlayUiManager.Play_BGMusic();
         StartCoroutine(ObstcalSpool());
     }
 
+    public void Game_Pause()
+    {
+        IsGameOver = true;
+        StopAllCoroutines();
+        Ref_ObjectSpool.AllObjectsDeactive();
+        Ref_Player.speed = 0f;
+    }
+
+    public void Game_Play()
+    {
+        Ref_Player.speed = -2f;
+        IsGameOver = false;
+        StartCoroutine(ObstcalSpool());
+    }
 }

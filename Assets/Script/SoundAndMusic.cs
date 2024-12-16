@@ -59,6 +59,7 @@ public class SoundAndMusic : MonoBehaviour
     }
     public void SetSound_Volume(float Volume)
     {
+        //Debug.Log(Volume);
         StaticData.Sound= Volume;
         StaticData.Touch= Volume;
         SoundAudioSource.volume = Volume;

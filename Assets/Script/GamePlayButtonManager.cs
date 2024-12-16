@@ -18,36 +18,58 @@ public class GamePlayButtonManager : MonoBehaviour
         
         switch(button)
         {
-           
+
             case "Close_SettingPopUp":
-                
+                SettingPopUp_Close();
+                break;
+            case "Open_SettingPopUp":
+                SettingPopUp_Click();
+                break;
+            case "Sound_Click":
+                Sound_Click();
+                break;
+            case "Music_Click":
+                Music_Click();
+                break;
+            case "Sound_Slidar":
+                SoundSlidar_Click();
+                break;
+            case "Music_Slidar":
+                MusicSlidar_Click();
                 break;
             case "Reload":
-                Click_Reload();
-                break ;
-            
-
+                RePlay_Game();
+                break;
         }
     }
 
     
-
-
     public void Sound_Click()
-    { 
-        if(StaticData.MuteSound==0)
+    {
+        if (StaticData.MuteSound == 0)
+        {
             Ref_GamePlay.Ref_GamePlayUiManager.Sound_Off();
-            
+           // Ref_GamePlay.Ref_GamePlayUiManager.SetSound(0f);
+        }
         else
+        {
             Ref_GamePlay.Ref_GamePlayUiManager.Sound_on();
+            //Ref_GamePlay.Ref_GamePlayUiManager.SetSound(StaticData.Sound);
+        }
     }
 
     public void Music_Click()
     {
         if (StaticData.MuteMusic == 0)
+        {
             Ref_GamePlay.Ref_GamePlayUiManager.Music_off();
+           // Ref_GamePlay.Ref_GamePlayUiManager.SetMusic(0f);
+        }
         else
+        {
             Ref_GamePlay.Ref_GamePlayUiManager.Music_on();
+            //Ref_GamePlay.Ref_GamePlayUiManager.SetMusic(StaticData.Music);
+        }
     }
 
     public void SoundSlidar_Click()
@@ -75,10 +97,21 @@ public class GamePlayButtonManager : MonoBehaviour
     }
 
     public void SettingPopUp_Click()
-    { 
-        
+    {
+        Ref_GamePlay.Game_Pause();
+        Ref_GamePlay.Ref_GamePlayUiManager.SettingPopUp_Open();
     }
 
-   
+    public void SettingPopUp_Close()
+    {
+        Ref_GamePlay.Ref_GamePlayUiManager.SettingPopUp_Close();
+        Ref_GamePlay.Game_Play();
+    }
 
+    public void RePlay_Game()
+    {
+        Ref_GamePlay.Ref_GamePlayUiManager.GameOverPopUp_Close();
+        Ref_GamePlay.GameStart();
+    }
+    
 }

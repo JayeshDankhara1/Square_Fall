@@ -1081,6 +1081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e12694f4fb68488f672b3c6a19375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Ref_GamePlay: {fileID: 0}
   BG_clip: {fileID: 8300000, guid: c7bb1f7b5bd12534a93f08f37851cd56, type: 3}
   Obstacl_Clip: {fileID: 8300000, guid: 91f976f4022e9304bb1cdaaefded24c8, type: 3}
   UnObstcl_Clip: {fileID: 8300000, guid: 5863d9d4d4c5d74448cfe5ae0f01db9e, type: 3}
@@ -1089,6 +1090,21 @@ MonoBehaviour:
   UnObsatacal_Sprite: {fileID: 21300000, guid: 2dcfc01b5b800426bacf64f66c0d09ad, type: 3}
   GameOverPopUP: {fileID: 4943647134039845441}
   ScoreText: {fileID: 122375446}
+  SettingPopUp: {fileID: 0}
+  Sound_Slider: {fileID: 0}
+  Sound_ImageSorce: {fileID: 0}
+  SoundOn_Sprite: {fileID: 0}
+  SoundOff_Sprite: {fileID: 0}
+  Music_Slider: {fileID: 0}
+  Music_ImageSorce: {fileID: 0}
+  MusicOn_Sprite: {fileID: 0}
+  MusicOff_Sprite: {fileID: 0}
+  Tocuch_ImageSorce: {fileID: 0}
+  TouchOn_Sprite: {fileID: 0}
+  TouchOff_Sprite: {fileID: 0}
+  Button_ImageSorce: {fileID: 0}
+  ButtonOn_Sprite: {fileID: 0}
+  ButtonOff_Sprite: {fileID: 0}
 --- !u!1 &577665760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,23 +1153,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1032696216536524590, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2356531100369568911, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2356531100369568911, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356531100369568911, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2389475906837163624, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2389475906837163624, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4258747330421543547, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
       propertyPath: m_Pivot.x
@@ -1237,27 +1253,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283172680127787282, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4283172680127787282, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4283172680127787282, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7522171777561970072, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7522171777561970072, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7522171777561970072, guid: 4a187bfcaea6c1041b7d4290d1ce323f, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.76
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

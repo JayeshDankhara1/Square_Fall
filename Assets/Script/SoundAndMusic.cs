@@ -51,13 +51,16 @@ public class SoundAndMusic : MonoBehaviour
     }
 
 
-    public void SoundMute(bool mute) {
-    
+    public void SoundMute(bool mute) 
+    {
+        StaticData.MuteSound = mute ? 1 : 0;
         SoundAudioSource.mute = mute;
         TouchAudioSource.mute = mute;
     }
     public void SetSound_Volume(float Volume)
     {
+        StaticData.Sound= Volume;
+        StaticData.Touch= Volume;
         SoundAudioSource.volume = Volume;
         TouchAudioSource.volume = Volume;
     }
@@ -73,6 +76,7 @@ public class SoundAndMusic : MonoBehaviour
 
     public void MuiscMute(bool mute) 
     {
+        StaticData.MuteMusic = mute ? 1:0;
         MusicAudioSource.mute = mute;
     }
 
@@ -80,6 +84,7 @@ public class SoundAndMusic : MonoBehaviour
 
     public void SetMusic_Volume(float Volume) 
     { 
+        StaticData.Music= Volume;
         MusicAudioSource.volume= Volume;
     }
     #endregion
@@ -97,7 +102,7 @@ public class SoundAndMusic : MonoBehaviour
 
 
     #region Other Function
-    public void PauseSoundAndMusic(bool IsPuse)
+    /*public void PauseSoundAndMusic(bool IsPuse)
     {
         if (IsPuse)
         {
@@ -111,6 +116,6 @@ public class SoundAndMusic : MonoBehaviour
             MusicAudioSource.UnPause();
             TouchAudioSource.UnPause();
         }
-    }
+    }*/
     #endregion
 }

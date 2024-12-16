@@ -18,9 +18,7 @@ public class GamePlayButtonManager : MonoBehaviour
         
         switch(button)
         {
-            case "Close_GameOver":
-                Click_CloseBtn();
-                break;
+           
             case "Close_SettingPopUp":
                 
                 break;
@@ -32,10 +30,36 @@ public class GamePlayButtonManager : MonoBehaviour
         }
     }
 
-    public void Click_CloseBtn()
-    {
-       
+    
+
+
+    public void Sound_Click()
+    { 
+        if(StaticData.MuteSound==0)
+            Ref_GamePlay.Ref_GamePlayUiManager.Sound_Off();
+            
+        else
+            Ref_GamePlay.Ref_GamePlayUiManager.Sound_on();
     }
+
+    public void Music_Click()
+    {
+        if (StaticData.MuteMusic == 0)
+            Ref_GamePlay.Ref_GamePlayUiManager.Music_off();
+        else
+            Ref_GamePlay.Ref_GamePlayUiManager.Music_on();
+    }
+
+    public void SoundSlidar_Click()
+    { 
+        Ref_GamePlay.Ref_GamePlayUiManager.Sound_Slider_Click();
+    }
+
+    public void MusicSlidar_Click()
+    {
+        Ref_GamePlay.Ref_GamePlayUiManager.Music_Slider_Click();
+    }
+
 
     public void Click_Reload()
     {
@@ -47,7 +71,12 @@ public class GamePlayButtonManager : MonoBehaviour
     public void GameOverPopUp_Load()
     {
         Ref_GamePlay.Ref_GamePlayUiManager.GameOverPopUp_Open();
-        Ref_GamePlay.Ref_GamePlayUiManager.ScoreText.text=(StaticData.Score).ToString();
+     
+    }
+
+    public void SettingPopUp_Click()
+    { 
+        
     }
 
    

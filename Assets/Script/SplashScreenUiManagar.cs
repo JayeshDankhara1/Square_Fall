@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SplashScreenUiManagar : MonoBehaviour
 {
     public SoundAndMusic Ref_SoundAndMusic;
+    public ButtonAnimation Ref_ButtonAnimation;
+
+
+    public GameObject Play;
 
     [Header("SettingPopUp")]
     public GameObject SettingPopUp;
@@ -35,6 +40,7 @@ public class SplashScreenUiManagar : MonoBehaviour
 
     public void Start()
     {
+      
         Play_BGMusic();
     }
 
@@ -50,16 +56,25 @@ public class SplashScreenUiManagar : MonoBehaviour
     {
         SettingPopUp.SetActive(false);
     }
+
+    public void PlayBtnCLick()
+    {
+        Ref_ButtonAnimation.ButtonClickAnimation(Play.transform, EndAction: () => {
+            SceneManager.LoadScene(1);
+        }
+        );
+    }
+
     public void Touch_On()
     {
-        Debug.Log("Singal");
+       // Debug.Log("Singal");
         StaticData.Player_Touch = 0;
         SingalTouch_ImageSorce.sprite= On_Sprite;
         MultiTouch_ImageSorce.sprite = Off_Sprite;
     }
     public void Touch_Off()
     {
-        Debug.Log("Multi");
+       // Debug.Log("Multi");
         StaticData.Player_Touch = 1;
         SingalTouch_ImageSorce.sprite = Off_Sprite;
         MultiTouch_ImageSorce.sprite = On_Sprite;

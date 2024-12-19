@@ -54,6 +54,10 @@ public class GamePlayUiManager : MonoBehaviour
     public GameObject Left_Button;
     public GameObject Right_Button;
 
+
+    [Space]
+    [Header("Score")]
+    public TextMeshProUGUI Score_Text;
     #endregion
 
     public void Start()
@@ -220,5 +224,8 @@ public class GamePlayUiManager : MonoBehaviour
         Right_Button.SetActive(false);
     }
 
-   
+    public void ScoreDispaly(int Score)
+    {
+        Score_Text.text = Score.ToString();
+    }
 }

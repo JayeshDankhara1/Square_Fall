@@ -59,10 +59,8 @@ public class GamePlay : MonoBehaviour
 
     public void GameOver()
     { 
-        IsGameOver = true;
-        StopAllCoroutines();
-        Ref_ObjectSpool.AllObjectsDeactive();
-        Ref_Player.speed = 0f;
+      
+        Game_Pause();
         Ref_GamePlayButtonManager.GameOverPopUp_Load();
 
 
@@ -71,10 +69,7 @@ public class GamePlay : MonoBehaviour
     public void GameStart()
     {
         StaticData.Score = 0;
-        Ref_Player.speed =-2f;
-        IsGameOver = false;
-       // Ref_GamePlayUiManager.Play_BGMusic();
-        StartCoroutine(ObstcalSpool());
+        Game_Play();
     }
 
     public void Game_Pause()

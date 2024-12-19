@@ -27,7 +27,8 @@ public class Collidar : MonoBehaviour
             if (Ref_PrefabsObject.Child.CompareTag("Obstacl"))
             {
                 StaticData.Score++;
-                Debug.Log("Score" + StaticData.Score);
+                //Debug.Log("Score" + StaticData.Score);
+                Ref_GamePlay.Ref_GamePlayUiManager.ScoreDispaly(StaticData.Score);
                 Ref_PrefabsObject.Deactive();
                 Ref_GamePlay.Ref_GamePlayUiManager.Play_Obstacal();
             }

@@ -47,12 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 0
   IsFocediraction: 0
-  isGameOver: 0
   Child: {fileID: 8325040253625710093}
   Child_Rigidbody: {fileID: 5798923815664106530}
   ObstaclSpriteRender: {fileID: 366763198386489171}
-  ObstacalSprite: {fileID: 21300000, guid: 1ade414808dfd45bebaee3951ef93e20, type: 3}
-  UnObsatacalSprite: {fileID: 21300000, guid: 2dcfc01b5b800426bacf64f66c0d09ad, type: 3}
+  Ref_GamePlay: {fileID: 0}
 --- !u!1 &8325040253625710093
 GameObject:
   m_ObjectHideFlags: 0

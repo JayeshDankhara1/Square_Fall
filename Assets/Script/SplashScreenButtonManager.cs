@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,20 +7,24 @@ using UnityEngine.U2D.IK;
 public class SplashScreenButtonManager : MonoBehaviour
 {
     public SplashScreenUiManagar Ref_SplashScreenUiManagar;
-
+    public Animation Ref_Animation;
 
     public void Start()
     {
         Ref_SplashScreenUiManagar.SettingPopUP_Close();
+        Ref_Animation = Animation.instance;
     }
     public void ButtonManager(string BtnName)
     {
+        if (Ref_Animation.IsClick) return;
+
         Ref_SplashScreenUiManagar.Play_TouchSound();
 
         switch (BtnName)
         {
             case "Play":
-                SceneManager.LoadScene(1);
+                //  Invoke(nameof(Play_Click), 0.3f);
+                Play_Click();
                 break;
             case "Open_SettingPopUp":
                 SettingPopUp_Click();
@@ -49,7 +53,11 @@ public class SplashScreenButtonManager : MonoBehaviour
         }
     }
 
-
+    public void Play_Click()
+    {
+        Ref_SplashScreenUiManagar.PlayBtnCLick();
+        
+    }
     public void Sound_Click()
     {
         if (StaticData.MuteSound == 0)

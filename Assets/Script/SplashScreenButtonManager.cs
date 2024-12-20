@@ -55,7 +55,7 @@ public class SplashScreenButtonManager : MonoBehaviour
 
     public void Play_Click()
     {
-        Ref_SplashScreenUiManagar.PlayBtnCLick();
+                     Ref_SplashScreenUiManagar.PlayBtnCLick();
         
     }
     public void Sound_Click()

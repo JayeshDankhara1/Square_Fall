@@ -9,9 +9,12 @@ public class SplashScreenUiManagar : MonoBehaviour
     public SoundAndMusic Ref_SoundAndMusic;
     public ButtonAnimation Ref_ButtonAnimation;
 
+    [Header("Button_Ref")]
+    public GameObject Play_Btn;
+    public GameObject Close_Btn;
+    public GameObject Setting_Btn;
 
-    public GameObject Play;
-
+    [Space]
     [Header("SettingPopUp")]
     public GameObject SettingPopUp;
     [Space]
@@ -46,20 +49,28 @@ public class SplashScreenUiManagar : MonoBehaviour
 
     public void SettingPopUp_Open()
     {
-        SetSound();
-        SetMusic();
-        SetInputMethod();
+        Ref_ButtonAnimation.ButtonClickAnimation(Close_Btn.transform, EndAction: () => {
+            SetSound();
+            SetMusic();
+            SetInputMethod();
 
-        SettingPopUp.SetActive(true);
+            SettingPopUp.SetActive(true);
+        }
+      );
+       
     }
     public void SettingPopUP_Close()
     {
-        SettingPopUp.SetActive(false);
+        Ref_ButtonAnimation.ButtonClickAnimation(Close_Btn.transform, EndAction: () => {
+            SettingPopUp.SetActive(false);
+        }
+       );
+       
     }
 
     public void PlayBtnCLick()
     {
-        Ref_ButtonAnimation.ButtonClickAnimation(Play.transform, EndAction: () => {
+        Ref_ButtonAnimation.ButtonClickAnimation(Play_Btn.transform, EndAction: () => {
             SceneManager.LoadScene(1);
         }
         );
@@ -67,21 +78,31 @@ public class SplashScreenUiManagar : MonoBehaviour
 
     public void Touch_On()
     {
-       // Debug.Log("Singal");
-        StaticData.Player_Touch = 0;
-        SingalTouch_ImageSorce.sprite= On_Sprite;
-        MultiTouch_ImageSorce.sprite = Off_Sprite;
+
+        Ref_ButtonAnimation.ButtonClickAnimation(SingalTouch_ImageSorce.transform, EndAction: () =>
+        {
+            StaticData.Player_Touch = 0;
+            SingalTouch_ImageSorce.sprite = On_Sprite;
+            MultiTouch_ImageSorce.sprite = Off_Sprite;
+        }
+        );
+       
     }
     public void Touch_Off()
     {
-       // Debug.Log("Multi");
+        Ref_ButtonAnimation.ButtonClickAnimation(MultiTouch_ImageSorce.transform, EndAction: () => {
         StaticData.Player_Touch = 1;
         SingalTouch_ImageSorce.sprite = Off_Sprite;
         MultiTouch_ImageSorce.sprite = On_Sprite;
+           
+        }
+       );
+        
     }
 
     public void SetSound()
     {
+       
         Sound_Slider.value = StaticData.Sound;
         if (StaticData.MuteSound == 0)
         {
@@ -91,6 +112,7 @@ public class SplashScreenUiManagar : MonoBehaviour
         {
             Sound_Off();
         }
+     
     }
 
 
@@ -104,47 +126,72 @@ public class SplashScreenUiManagar : MonoBehaviour
         else
         {
             Music_off();
+           
         }
+
+        
+      
     }
    
     public void Sound_Slider_Click()
     {
        
         Ref_SoundAndMusic.SetSound_Volume(Sound_Slider.value);
+       
 
     }
 
     public void Music_Slider_Click()
     {
-       
-      Ref_SoundAndMusic.SetMusic_Volume(Music_Slider.value);
+      
+        Ref_SoundAndMusic.SetMusic_Volume(Music_Slider.value);
+
     }
 
     public void Sound_on()
     {
-      
+        Ref_ButtonAnimation.ButtonClickAnimation(Sound_ImageSorce.transform, EndAction: () => {
+           
         Ref_SoundAndMusic.SoundMute(false);
         Sound_ImageSorce.sprite = SoundOn_Sprite;
+        }
+         );
 
 
     }
     public void Sound_Off()
     {
+        Ref_ButtonAnimation.ButtonClickAnimation(Sound_ImageSorce.transform, EndAction: () => {
+          
         Ref_SoundAndMusic.SoundMute(true);
+       
+
         Sound_ImageSorce.sprite = SoundOff_Sprite;
+        }
+       );
        
     }
 
     public void Music_on()
     {
-       Ref_SoundAndMusic.MuiscMute(false);
+
+        Ref_ButtonAnimation.ButtonClickAnimation(Music_ImageSorce.transform, EndAction: () => {
+        Ref_SoundAndMusic.MuiscMute(false);
         Music_ImageSorce.sprite = MusicOn_Sprite;
+           
+        }
+       );
         
     }
     public void Music_off()
     {
+        Ref_ButtonAnimation.ButtonClickAnimation(Music_ImageSorce.transform, EndAction: () => {
+         
         Ref_SoundAndMusic.MuiscMute(true);
-        Music_ImageSorce.sprite = MusicOff_Sprite;
+            Ref_SoundAndMusic.SetMusic_Volume(0, false);
+            Music_ImageSorce.sprite = MusicOff_Sprite;
+        }
+       );
     }
 
     public void SetInputMethod()

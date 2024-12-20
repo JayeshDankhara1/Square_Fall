@@ -16,9 +16,9 @@ public class ButtonAnimation: MonoBehaviour
 
     public void ButtonClickAnimation(Transform Button,UnityAction EndAction)
     {
-        Debug.Log("Animation Start");
+       // Debug.Log("Animation Start");
         if(Ref_Animation.IsClick) return;
-        Debug.Log("Animation Condtion Ok");
+       // Debug.Log("Animation Condtion Ok");
         Button.DOPunchScale(new Vector3(0.2f,0.2f,0.2f), 0.25f,2)
          .OnStart(()=> Ref_Animation.IsClick=true)
          .OnComplete(()=> {

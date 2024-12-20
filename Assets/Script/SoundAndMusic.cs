@@ -83,9 +83,12 @@ public class SoundAndMusic : MonoBehaviour
 
     
 
-    public void SetMusic_Volume(float Volume) 
-    { 
-        StaticData.Music= Volume;
+    public void SetMusic_Volume(float Volume,bool IsChage=true) 
+    {
+        if (IsChage)
+        {
+            StaticData.Music = Volume;
+        }
         MusicAudioSource.volume= Volume;
     }
     #endregion

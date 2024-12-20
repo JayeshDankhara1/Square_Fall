@@ -384,7 +384,6 @@ GameObject:
   - component: {fileID: 444424695}
   - component: {fileID: 444424694}
   - component: {fileID: 444424693}
-  - component: {fileID: 444424696}
   m_Layer: 5
   m_Name: PlayBtn
   m_TagString: Untagged
@@ -506,18 +505,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444424691}
   m_CullTransparentMesh: 1
---- !u!114 &444424696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444424691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8926891aa30619459bfc963961f3477, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,7 +1304,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ref_SoundAndMusic: {fileID: 1293004098}
   Ref_ButtonAnimation: {fileID: 1327486774}
-  Play: {fileID: 444424691}
+  Play_Btn: {fileID: 444424691}
+  Close_Btn: {fileID: 3190086186500661227}
+  Setting_Btn: {fileID: 1514524651}
   SettingPopUp: {fileID: 1316376992}
   BG_clip: {fileID: 8300000, guid: c7bb1f7b5bd12534a93f08f37851cd56, type: 3}
   Click_Clip: {fileID: 8300000, guid: 8547ad2674b2f5a4f8da7f72c0c29467, type: 3}

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,16 +6,27 @@ using System.Diagnostics.Contracts;
 using System.Net.Http.Headers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GamePlayUiManager : MonoBehaviour
 {
 
-    //  public static GamePlayUiManager instance;
-    // Start is called before the first frame update
+    #region Refarance Script
+    public static GamePlayUiManager instance;
+    #endregion
+
+   
     #region Varibal
     [Header("Ref_Scrpit")]
     public GamePlay Ref_GamePlay;
+    public Animation Ref_Animation;
+    [Space]
+    [Header("Btton_Ref")]
+    public Transform Home_Btn;
+    public Transform RePlay_Btn;
+    public Transform Setting_Btn;
+    public Transform Close_Btn;
 
     [Header("Audio_Clip")]
     public AudioClip BG_clip;
@@ -26,15 +38,18 @@ public class GamePlayUiManager : MonoBehaviour
     public Sprite Obstacal_Sprite;
     public Sprite UnObsatacal_Sprite;
 
-
     [Space]
     [Header("GameOver_PopUp")]
-    public GameObject GameOverPopUP;
+    public GameObject GameOverPopUp_MainParent;
+    public Transform GameOverPopUp_MainBG;
+    public Image GameOver_AlphaBG;
     public TextMeshProUGUI ScoreText;
 
     [Space]
     [Header("Setting_PopUp")]
-    public GameObject SettingPopUp;
+    public GameObject SettingPopUp_MainParent;
+    public Transform SettingPopUp_MainBG;
+    public Image SettingPopUp_AlphaBG;
 
     [Space]
     [Header("Sound Componat")]
@@ -58,26 +73,42 @@ public class GamePlayUiManager : MonoBehaviour
     [Space]
     [Header("Score")]
     public TextMeshProUGUI Score_Text;
+    public TextMeshProUGUI CounDowan_Text;
+
     #endregion
 
+
+    #region Unity Function
+    public void Awake()
+    {
+        instance = this;
+    }
     public void Start()
     {
-        GameOverPopUp_Close();
-        SettingPopUp_Close();
-        
-        
+        Ref_Animation = Animation.instance;
+        GameOverPopUp_Close(false);
+        SettingPopUp_Close(false);
     }
+    #endregion 
 
     #region GameOver_PopUP Function
     public void GameOverPopUp_Open()
     {
         ScoreText.text = (StaticData.Score).ToString();
-        GameOverPopUP.SetActive(true);
+        Ref_Animation.PopupAnimation(true,GameOverPopUp_MainParent, GameOver_AlphaBG, GameOverPopUp_MainBG);
     }
 
-    public void GameOverPopUp_Close()
+    public void GameOverPopUp_Close(bool IsAnimated=true)
     {
-        GameOverPopUP.SetActive(false);
+        if (IsAnimated)
+        {
+            Ref_Animation.ButtonClickAnimation(RePlay_Btn, EndAction: () =>
+            Ref_Animation.PopupAnimation(false, GameOverPopUp_MainParent, GameOver_AlphaBG, GameOverPopUp_MainBG)
+            );
+        }
+        {
+            GameOverPopUp_MainParent.SetActive(false);
+        }
     }
     #endregion
 
@@ -106,112 +137,147 @@ public class GamePlayUiManager : MonoBehaviour
     #region Sound and Music Function
     public void SetSound()
     {
-        // Ref_GamePlay.Ref_SoundAndMusic.SetSound_Volume(Sound_Slider.value);
-        //Ref_GamePlay.Ref_SoundAndMusic.Settouch_Volume(Sound_Slider.value);
         Sound_Slider.value = StaticData.Sound;
         if (StaticData.MuteSound == 0)
         {
-            Sound_on();
+            Sound_on(false);
         }
         else
         {
-            Sound_Off();
+            Sound_Off(false);
         }
     }
 
     public void SetSound(float Volume)
     {
-
         Sound_Slider.value = Volume;
     }
 
     public void SetMusic()
     {
-        //Ref_GamePlay.Ref_SoundAndMusic.SetMusic_Volume(Sound_Slider.value);
         Music_Slider.value = StaticData.Music;
         if (StaticData.MuteMusic == 0)
         {
-            Music_on();
+            Music_on(false);
         }
         else
         {
-            Music_off();
+            Music_off(false);
         }
     }
     public void SetMusic(float Volume)
     {
-        //Ref_GamePlay.Ref_SoundAndMusic.SetMusic_Volume(Sound_Slider.value);
         Music_Slider.value = Volume;
     }
     public void Sound_Slider_Click()
     {
-        //StaticData.Sound = Sound_Slider.value;
-        //StaticData.Touch = Sound_Slider.value;
-        //Ref_GamePlay.Ref_SoundAndMusic.SoundAudioSource.volume = Sound_Slider.value;
-        //Ref_GamePlay.Ref_SoundAndMusic.TouchAudioSource.volume = Sound_Slider.value;
-        //Ref_GamePlay.Ref_SoundAndMusic.SetSound_Volume(Sound_Slider.value);
-
-        // Ref_GamePlay.Ref_SettingPopUp.SetSound_Volume(Sound_Slider.value);
         Ref_GamePlay.Ref_SoundAndMusic.SetSound_Volume(Sound_Slider.value);
 
     }
 
     public void Music_Slider_Click()
-    {
-        //  Ref_GamePlay.Ref_SettingPopUp.SetMusic_Volume(Music_Slider.value);
-        //Ref_GamePlay.Ref_SoundAndMusic.SetMusic_Volume(Music_Slider.value);
-        //Ref_GamePlay.Ref_SoundAndMusic.MusicAudioSource.volume = Music_Slider.value;
+    { 
         Ref_GamePlay.Ref_SoundAndMusic.SetMusic_Volume(Music_Slider.value);
     }
 
-    public void Sound_on()
+    public void Sound_on(bool IsAnimated = true)
     {
-        // Ref_GamePlay.Ref_SettingPopUp.SoundOn();
-        Ref_GamePlay.Ref_SoundAndMusic.SoundMute(false);
-        Sound_ImageSorce.sprite = SoundOn_Sprite;
-
-
+        if (IsAnimated)
+        {
+            Ref_Animation.ButtonClickAnimation(Sound_ImageSorce.gameObject.transform,EndAction: ()=>
+           {
+               Ref_GamePlay.Ref_SoundAndMusic.SoundMute(false);
+               Sound_ImageSorce.sprite = SoundOn_Sprite;
+           } 
+            );
+        }
+        else
+        {
+            Ref_GamePlay.Ref_SoundAndMusic.SoundMute(false);
+            Sound_ImageSorce.sprite = SoundOn_Sprite;
+        }
     }
-    public void Sound_Off()
+    public void Sound_Off(bool IsAnimated=true)
     {
-        Ref_GamePlay.Ref_SoundAndMusic.SoundMute(true);
-        Sound_ImageSorce.sprite = SoundOff_Sprite;
-        // Ref_GamePlay.Ref_SettingPopUp.SoundOff();
+        if (IsAnimated)
+        {
+            Ref_Animation.ButtonClickAnimation(Sound_ImageSorce.gameObject.transform, EndAction: () =>
+            {
+                Ref_GamePlay.Ref_SoundAndMusic.SoundMute(true);
+                Sound_ImageSorce.sprite = SoundOff_Sprite;
+            }
+            );
+        }
+        else
+        {
+            Ref_GamePlay.Ref_SoundAndMusic.SoundMute(true);
+            Sound_ImageSorce.sprite = SoundOff_Sprite;
+        }
     }
 
-    public void Music_on()
+    public void Music_on(bool IsAnimated = true)
     {
-        Ref_GamePlay.Ref_SoundAndMusic.MuiscMute(false);
-        Music_ImageSorce.sprite = MusicOn_Sprite;
-        //   Ref_GamePlay.Ref_SettingPopUp.MusicOn();
+        if (IsAnimated)
+        {
+            Ref_Animation.ButtonClickAnimation(Music_ImageSorce.gameObject.transform, EndAction: () =>
+            {
+                Ref_GamePlay.Ref_SoundAndMusic.MuiscMute(false);
+                Music_ImageSorce.sprite = MusicOn_Sprite;
+            }
+            );
+        }
+        else
+        {
+            Ref_GamePlay.Ref_SoundAndMusic.MuiscMute(false);
+            Music_ImageSorce.sprite = MusicOn_Sprite;
+        }
     }
-    public void Music_off()
+    public void Music_off(bool IsAnimated = true)
     {
-        Ref_GamePlay.Ref_SoundAndMusic.MuiscMute(true);
-        Music_ImageSorce.sprite = MusicOff_Sprite;
-        //  Ref_GamePlay.Ref_SettingPopUp.MusicOff();
+        if (IsAnimated)
+        {
+            Ref_Animation.ButtonClickAnimation(Music_ImageSorce.gameObject.transform, EndAction: () =>
+            {
+                Ref_GamePlay.Ref_SoundAndMusic.MuiscMute(true);
+                Music_ImageSorce.sprite = MusicOff_Sprite;
+            }
+            );
+        }
+        else
+        {
+            Ref_GamePlay.Ref_SoundAndMusic.MuiscMute(true);
+            Music_ImageSorce.sprite = MusicOff_Sprite;
+        }
+       
     }
 
     #endregion
 
-
-  
-  
-
+    #region SoundPopUP Function
     public void SettingPopUp_Open()
     {
         SetSound();
         SetMusic();
-        SettingPopUp.SetActive(true);
+        Ref_Animation.ButtonClickAnimation(Setting_Btn, EndAction: () =>
+        Ref_Animation.PopupAnimation(true, SettingPopUp_MainParent, SettingPopUp_AlphaBG, SettingPopUp_MainBG)
+        );
+       
     }
 
-    public void SettingPopUp_Close()
+    public void SettingPopUp_Close(bool IsAnimated = true)
     {
-
-        SettingPopUp.SetActive(false);
+        if (IsAnimated)
+        {
+            Ref_Animation.ButtonClickAnimation(Close_Btn, EndAction: () =>
+            Ref_Animation.PopupAnimation(false, SettingPopUp_MainParent, SettingPopUp_AlphaBG, SettingPopUp_MainBG)
+            );
+        }
+        else
+        {
+            SettingPopUp_MainParent.SetActive(false);
+        }
+     
     }
-
-
 
     public void MutiTouchButton_On()
     {
@@ -223,9 +289,31 @@ public class GamePlayUiManager : MonoBehaviour
         Left_Button.SetActive(false);
         Right_Button.SetActive(false);
     }
+    #endregion
 
+    #region GameOverPopUp Function
     public void ScoreDispaly(int Score)
     {
         Score_Text.text = Score.ToString();
     }
+
+    public void CounDowan(string Text)
+    {
+        CounDowan_Text.text = Text;   
+    }
+
+    public void CounDowan_Set(bool Set)
+    {
+        CounDowan_Text.gameObject.SetActive(Set);
+    }
+
+    public void HomeBtnCLick()
+    {
+        Ref_Animation.ButtonClickAnimation(Home_Btn, EndAction: () =>
+        {
+            SceneManager.LoadScene(0);
+        }
+        );
+    }
+    #endregion
 }

@@ -6,16 +6,24 @@ using UnityEngine.UI;
 
 public class GamePlayButtonManager : MonoBehaviour
 {
- //   public Button Button;
-   public GamePlay Ref_GamePlay;
+    #region Refance Script
+    public GamePlay Ref_GamePlay;
+    public static GamePlayButtonManager instance;
+    #endregion
 
-    public void Start()
+
+    #region Unity Function
+    public void Awake()
     {
-      // Button.transform.DOPunchScale(Vector3.one*1.2f,1); 
+        instance = this;
     }
+    #endregion
+
+    #region Other Function
+
     public void Button_Click(string button)
     {
-        
+        Ref_GamePlay.Ref_GamePlayUiManager.Play_TouchSound();
         switch(button)
         {
 
@@ -46,36 +54,33 @@ public class GamePlayButtonManager : MonoBehaviour
             case "Right_ButtonClick":
                 Right_ButtonClick();
                 break;
+            case "Home":
+                Home_Click();
+                break;
         }
     }
+ 
 
-    
+    #endregion
+
+    #region SettingPopUP Function
     public void Sound_Click()
     {
-        if (StaticData.MuteSound == 0)
-        {
-            Ref_GamePlay.Ref_GamePlayUiManager.Sound_Off();
-           // Ref_GamePlay.Ref_GamePlayUiManager.SetSound(0f);
-        }
-        else
-        {
+
+
+        if (StaticData.MuteSound == 0) 
+             Ref_GamePlay.Ref_GamePlayUiManager.Sound_Off(); 
+        else 
             Ref_GamePlay.Ref_GamePlayUiManager.Sound_on();
-            //Ref_GamePlay.Ref_GamePlayUiManager.SetSound(StaticData.Sound);
-        }
+  
     }
 
     public void Music_Click()
     {
         if (StaticData.MuteMusic == 0)
-        {
             Ref_GamePlay.Ref_GamePlayUiManager.Music_off();
-           // Ref_GamePlay.Ref_GamePlayUiManager.SetMusic(0f);
-        }
         else
-        {
             Ref_GamePlay.Ref_GamePlayUiManager.Music_on();
-            //Ref_GamePlay.Ref_GamePlayUiManager.SetMusic(StaticData.Music);
-        }
     }
 
     public void SoundSlidar_Click()
@@ -86,20 +91,6 @@ public class GamePlayButtonManager : MonoBehaviour
     public void MusicSlidar_Click()
     {
         Ref_GamePlay.Ref_GamePlayUiManager.Music_Slider_Click();
-    }
-
-
-    public void Click_Reload()
-    {
-        Ref_GamePlay.Ref_GamePlayUiManager.GameOverPopUp_Close();
-        Ref_GamePlay.GameStart();
-
-    }
-
-    public void GameOverPopUp_Load()
-    {
-        Ref_GamePlay.Ref_GamePlayUiManager.GameOverPopUp_Open();
-     
     }
 
     public void SettingPopUp_Click()
@@ -114,6 +105,15 @@ public class GamePlayButtonManager : MonoBehaviour
         Ref_GamePlay.Game_Play();
     }
 
+    #endregion
+
+    #region GameOverPop Function
+    
+    public void GameOverPopUp_Load()
+    {
+        Ref_GamePlay.Ref_GamePlayUiManager.GameOverPopUp_Open();
+
+    }
     public void RePlay_Game()
     {
         Ref_GamePlay.Ref_GamePlayUiManager.GameOverPopUp_Close();
@@ -128,4 +128,10 @@ public class GamePlayButtonManager : MonoBehaviour
     {
         Ref_GamePlay.Ref_Player.speed = 2;
     }
+    public void Home_Click() => Ref_GamePlay.Ref_GamePlayUiManager.HomeBtnCLick();
+    #endregion
+
 }
+
+
+

@@ -104,22 +104,7 @@ public class StaticData
         }
     }
 
-    public static int MuteTouch
-    {
-        get
-        {
-            return PlayerPrefs.GetInt("MuteTouch", 0);
-        }
-        set
-        {
-            PlayerPrefs.SetInt("MuteTouch", value);
-            PlayerPrefs.Save();
-
-        }
-    }
-
-    #endregion
-
+  
     public static int Player_Touch
     {
         get
@@ -134,5 +119,5 @@ public class StaticData
         }
     }
 
-
+    #endregion
 }

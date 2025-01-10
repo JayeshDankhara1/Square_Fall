@@ -5,47 +5,49 @@ using UnityEngine;
 
 public class GamePlay : MonoBehaviour
 {
-    public ObjectSpool Ref_ObjectSpool;
-    public bool IsGameOver = false;
+
+    #region Script Refance
     public static GamePlay instance;
+    public ObjectSpool Ref_ObjectSpool;
     public Player Ref_Player;
-    
     public SoundAndMusic Ref_SoundAndMusic;
     public GamePlayUiManager Ref_GamePlayUiManager;
     public GamePlayButtonManager Ref_GamePlayButtonManager;
-  //  public SettingPopUp Ref_SettingPopUp;
+    #endregion
 
+    #region Varibal
+    public bool IsGameOver = false;
+    #endregion
 
+    #region Unity Function
     public void Awake()
     {
-        instance = this;
+            instance = this;
     }
+
     public void Start()
     {
-        Ref_GamePlayUiManager.GameOverPopUp_Close();
+       
+        Ref_GamePlayUiManager = GamePlayUiManager.instance;
+        Ref_GamePlayButtonManager = GamePlayButtonManager.instance;
         Ref_ObjectSpool = ObjectSpool.instance;
         Ref_SoundAndMusic = SoundAndMusic.instance;
         
-        
-        GameStart();
-       // StartCoroutine(ObstcalSpool());
+        Ref_GamePlayUiManager.GameOverPopUp_Close(false);
+        StartCoroutine(TimeCoundowan());
     }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-
-           // Debug.Log("Obstacl Creat");
          Ref_ObjectSpool.ActiveObject();
-
         }
-        
-
     }
 
-   
+    #endregion
 
+    #region Function
     public IEnumerator ObstcalSpool()
     {
         while (!IsGameOver)
@@ -55,15 +57,10 @@ public class GamePlay : MonoBehaviour
            
         }
     }
-
-
     public void GameOver()
-    { 
-      
+    {  
         Game_Pause();
         Ref_GamePlayButtonManager.GameOverPopUp_Load();
-
-
     }
 
     public void GameStart()
@@ -86,4 +83,22 @@ public class GamePlay : MonoBehaviour
         IsGameOver = false;
         StartCoroutine(ObstcalSpool());
     }
+
+    public IEnumerator TimeCoundowan()
+    {
+        
+        for (int i = 3; i >= 0; i--)
+        {
+            Ref_GamePlayUiManager.CounDowan_Set(true);
+            if (i > 0)
+            { Ref_GamePlayUiManager.CounDowan(i.ToString()); }
+            else
+            { Ref_GamePlayUiManager.CounDowan("Go.!!!"); }
+            yield return new WaitForSeconds(1);
+        }
+        Ref_GamePlayUiManager.CounDowan_Set(false);
+        GameStart();
+    }
+    #endregion
+
 }

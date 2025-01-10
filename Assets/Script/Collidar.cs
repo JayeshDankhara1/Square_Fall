@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class Collidar : MonoBehaviour
 {
+    #region Refrance Script
     public PrefabsObject Ref_PrefabsObject;
-  //  public ObjectSpool Ref_objectSpool;
     public GamePlay Ref_GamePlay;
-    //public SoundAndMusic Ref_SoundAndMusic;
-   // public GamePlayUiManager Ref_GamePlayUiManager;
+    #endregion
 
+
+    #region Unity Function
     public void Start()
-    {
-      //  Ref_objectSpool = ObjectSpool.instance;
+    {  
         Ref_GamePlay = GamePlay.instance;
-       // Ref_GamePlayUiManager = GamePlayUiManager.instance;
-       // Ref_SoundAndMusic = SoundAndMusic.instance;
     }
+    #endregion
+
+    #region Function
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision== null) return;
@@ -27,7 +28,6 @@ public class Collidar : MonoBehaviour
             if (Ref_PrefabsObject.Child.CompareTag("Obstacl"))
             {
                 StaticData.Score++;
-                //Debug.Log("Score" + StaticData.Score);
                 Ref_GamePlay.Ref_GamePlayUiManager.ScoreDispaly(StaticData.Score);
                 Ref_PrefabsObject.Deactive();
                 Ref_GamePlay.Ref_GamePlayUiManager.Play_Obstacal();
@@ -41,11 +41,9 @@ public class Collidar : MonoBehaviour
         }
         else if (collision.CompareTag("Collidar"))
         {
-            
-            //collision.gameObject.SetActive(false);
-
-
             Ref_PrefabsObject.Deactive();
         }
     }
+    #endregion 
 }
+

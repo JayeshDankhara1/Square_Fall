@@ -6,13 +6,14 @@ using UnityEngine;
 
 public class SoundAndMusic : MonoBehaviour
 {
+    #region AudioSorce & Refarance Script
     public AudioSource SoundAudioSource;
     public AudioSource MusicAudioSource;
     public AudioSource TouchAudioSource;
 
     [HideInInspector]
     public static SoundAndMusic instance;
-
+    #endregion
 
     #region Unity Function
     public void Awake()
@@ -105,21 +106,5 @@ public class SoundAndMusic : MonoBehaviour
     #endregion
 
 
-    #region Other Function
-    /*public void PauseSoundAndMusic(bool IsPuse)
-    {
-        if (IsPuse)
-        {
-            SoundAudioSource.Pause();
-            MusicAudioSource.Pause();
-            TouchAudioSource.Pause();
-        }
-        else
-        {
-            SoundAudioSource.UnPause();
-            MusicAudioSource.UnPause();
-            TouchAudioSource.UnPause();
-        }
-    }*/
-    #endregion
+   
 }

@@ -5,27 +5,27 @@ using UnityEngine;
 
 public class ObjectSpool : MonoBehaviour
 {
-
+    #region Varibal & Refrance Script
     public List<PrefabsObject> objects = new List<PrefabsObject> ();
     public PrefabsObject prefab;
     public Transform prefabParent;
 
     public GamePlay Ref_GamePlay;
-
     public static ObjectSpool instance;
-
+    #endregion 
     #region Unity function
     public void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        instance = this;
+        //if (instance == null)
+        //{
+        //    instance = this;
+        //    DontDestroyOnLoad(gameObject);
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     void Start()

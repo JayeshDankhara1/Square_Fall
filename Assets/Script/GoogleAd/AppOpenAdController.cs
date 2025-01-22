@@ -11,7 +11,11 @@ namespace GoogleMobileAds.Sample
     [AddComponentMenu("GoogleMobileAds/Samples/AppOpenAdController")]
     public class AppOpenAdController : MonoBehaviour
     {
- 
+        /// <summary>
+        /// UI element activated when an ad is ready to show.
+        /// </summary>
+        public GameObject AdLoadedStatus;
+
         // These ad units are configured to always serve test ads.
 #if UNITY_ANDROID
         private const string _adUnitId = "ca-app-pub-3940256099942544/9257395921";
@@ -21,7 +25,23 @@ namespace GoogleMobileAds.Sample
         private const string _adUnitId = "unused";
 #endif
 
+        // App open ads can be preloaded for up to 4 hours.
+        private readonly TimeSpan TIMEOUT = TimeSpan.FromHours(4);
+        private DateTime _expireTime;
         private AppOpenAd _appOpenAd;
+
+        private void Awake()
+        {
+            // Use the AppStateEventNotifier to listen to application open/close events.
+            // This is used to launch the loaded ad when we open the app.
+            AppStateEventNotifier.AppStateChanged += OnAppStateChanged;
+        }
+
+        private void OnDestroy()
+        {
+            // Always unlisten to events when complete.
+            AppStateEventNotifier.AppStateChanged -= OnAppStateChanged;
+        }
 
         /// <summary>
         /// Loads the ad.
@@ -63,8 +83,14 @@ namespace GoogleMobileAds.Sample
                     Debug.Log("App open ad loaded with response : " + ad.GetResponseInfo());
                     _appOpenAd = ad;
 
+                    // App open ads can be preloaded for up to 4 hours.
+                    _expireTime = DateTime.Now + TIMEOUT;
+
                     // Register to ad events to extend functionality.
                     RegisterEventHandlers(ad);
+
+                    // Inform the UI that the ad is ready.
+                    AdLoadedStatus?.SetActive(true);
                 });
         }
 
@@ -74,17 +100,18 @@ namespace GoogleMobileAds.Sample
         public void ShowAd()
         {
             // App open ads can be preloaded for up to 4 hours.
-            if (_appOpenAd != null && _appOpenAd.CanShowAd())
+            if (_appOpenAd != null && _appOpenAd.CanShowAd() && DateTime.Now < _expireTime)
             {
                Debug.Log("Showing app open ad.");
                 _appOpenAd.Show();
             }
             else
             {
-                RewardManager.instance.AppOpenComp();
-                LoadAd();
                 Debug.LogError("App open ad is not ready yet.");
             }
+
+            // Inform the UI that the ad is not ready.
+            AdLoadedStatus?.SetActive(false);
         }
 
         /// <summary>
@@ -98,7 +125,9 @@ namespace GoogleMobileAds.Sample
                 _appOpenAd.Destroy();
                 _appOpenAd = null;
             }
-            
+
+            // Inform the UI that the ad is not ready.
+            AdLoadedStatus?.SetActive(false);
         }
 
         /// <summary>
@@ -110,6 +139,17 @@ namespace GoogleMobileAds.Sample
             {
                 var responseInfo = _appOpenAd.GetResponseInfo();
                 UnityEngine.Debug.Log(responseInfo);
+            }
+        }
+
+        private void OnAppStateChanged(AppState state)
+        {
+            Debug.Log("App State changed to : " + state);
+
+            // If the app is Foregrounded and the ad is available, show it.
+            if (state == AppState.Foreground)
+            {
+                ShowAd();
             }
         }
 
@@ -136,12 +176,15 @@ namespace GoogleMobileAds.Sample
             ad.OnAdFullScreenContentOpened += () =>
             {
                 Debug.Log("App open ad full screen content opened.");
+
+                // Inform the UI that the ad is consumed and not ready.
+                AdLoadedStatus?.SetActive(false);
             };
             // Raised when the ad closed full screen content.
             ad.OnAdFullScreenContentClosed += () =>
             {
                 Debug.Log("App open ad full screen content closed.");
-                RewardManager.instance.AppOpenComp();
+
                 // It may be useful to load a new ad when the current one is complete.
                 LoadAd();
             };

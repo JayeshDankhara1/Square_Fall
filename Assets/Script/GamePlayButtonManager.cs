@@ -116,6 +116,8 @@ public class GamePlayButtonManager : MonoBehaviour
     }
     public void RePlay_Game()
     {
+        Ref_GamePlay.Ref_GoogleAds.ShowRewardedAd();
+
         Ref_GamePlay.Ref_GamePlayUiManager.GameOverPopUp_Close();
         Ref_GamePlay.GameStart();
     }

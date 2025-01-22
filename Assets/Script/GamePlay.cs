@@ -13,6 +13,7 @@ public class GamePlay : MonoBehaviour
     public SoundAndMusic Ref_SoundAndMusic;
     public GamePlayUiManager Ref_GamePlayUiManager;
     public GamePlayButtonManager Ref_GamePlayButtonManager;
+    public GoogleAds Ref_GoogleAds;
     #endregion
 
     #region Varibal
@@ -32,7 +33,7 @@ public class GamePlay : MonoBehaviour
         Ref_GamePlayButtonManager = GamePlayButtonManager.instance;
         Ref_ObjectSpool = ObjectSpool.instance;
         Ref_SoundAndMusic = SoundAndMusic.instance;
-        
+        Ref_GoogleAds = GoogleAds.instance;
         Ref_GamePlayUiManager.GameOverPopUp_Close(false);
         StartCoroutine(TimeCoundowan());
     }
